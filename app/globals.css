@@ -5,8 +5,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ededed;
+    --foreground: #0a0a0a;
   }
 }
 
@@ -22,6 +22,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 3% 3% 10% 10%;
+  
 }
 
 * {
@@ -33,6 +35,58 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  font-size: 15px;
+  font-weight: 800;
+}   
+
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.pfp {
+  width: 115px;
+  height: 115px;
+  border-radius: 10px;
+  width: 100%;
+}
+
+.cards {
+  background-color: white;
+  padding: 10px;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  color: black;
+  text-align: left;
+  gap: 10px;
+  border-radius: 10px;
+  filter: drop-shadow(3px 3px 10px)
+}
+
+.cardsCollection {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.RecentlyCheckedIn {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
 }
 
 @media (prefers-color-scheme: dark) {
