@@ -10,9 +10,12 @@ const Sidebar: React.FC = () => {
             <a>Map</a>
             <a>Settings</a>
         </div>
+
+        
     );
 };
 
 
 
 export default Sidebar;
+
