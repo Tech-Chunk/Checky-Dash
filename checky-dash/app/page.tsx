@@ -6,7 +6,7 @@ import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
 import {Card, CardBody, CardFooter} from "@nextui-org/card";
 import {Image} from "@nextui-org/image"
-import Sidebar from "@/components/Sidebar";
+import Sidebar from "@/components/navbar";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
@@ -27,13 +27,12 @@ const list = [
 
 export default function Home() {
   return (
+
+
     <div className="main">
 
 
-        <Sidebar></Sidebar>
-
-
-        <div className="gap-2 grid grid-cols-2 sm:grid-cols-2">
+    <div className="gap-2 grid grid-cols-2 sm:grid-cols-8">
       {list.map((item, index) => (
         <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
           <CardBody className="overflow-visible p-0">
