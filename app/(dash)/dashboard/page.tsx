@@ -27,8 +27,8 @@ const list = [
 
 export default function Home() {
   return (
-    <div className="flex flex-row gap-4 ">
-    <Card className="col-span-12 sm:col-span-4 h-[500px] w-[800px]">
+    <div className="flex flex-row gap-4 md:flex-wrap">
+    <Card className="col-span-12 sm:col-span-4 h-100 w-">
       <CardHeader className="absolute z-10 top-1 flex-col !items-start">
         <h1 className=" font-medium text-3xl">Checked In</h1>
       </CardHeader>
