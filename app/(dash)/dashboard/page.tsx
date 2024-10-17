@@ -4,7 +4,7 @@ import { Link } from "@nextui-org/link";
 import { Snippet } from "@nextui-org/snippet";
 import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
-import {Card, CardBody, CardFooter} from "@nextui-org/card";
+import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 import {Image} from "@nextui-org/image"
 import Sidebar from "@/components/Dashnavbar";
 import { siteConfig } from "@/config/site";
@@ -27,29 +27,24 @@ const list = [
 
 export default function Home() {
   return (
-
-
-    <div className="main">
-
+    <div className="flex flex-row gap-4 ">
+    <Card className="col-span-12 sm:col-span-4 h-[500px] w-[800px]">
+      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+        <h1 className=" font-medium text-3xl">Checked In</h1>
+      </CardHeader>
+    </Card>
+    <Card className="col-span-12 sm:col-span-4 h-[500px] w-[800px]">
+      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+        <h1 className=" font-medium text-3xl">Recent Activity</h1>
+      </CardHeader>
+    </Card>
 
     <div className="gap-2 grid grid-cols-2 sm:grid-cols-8">
+
+      
+
       {list.map((item, index) => (
-        <Card shadow="sm" key={index} isPressable onPress={() => console.log("item pressed")}>
-          <CardBody className="overflow-visible p-0">
-            <Image
-              shadow="sm"
-              radius="lg"
-              width="100%"
-              alt={item.title}
-              className="w-full object-cover h-[140px]"
-              src={item.img}
-            />
-          </CardBody>
-          <CardFooter className="text-small justify-between">
-            <b>{item.title}</b>
-            <p className="text-default-500">{item.price}</p>
-          </CardFooter>
-        </Card>
+        <div></div>
       ))}
     </div>
 

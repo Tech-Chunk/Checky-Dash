@@ -24,18 +24,22 @@ import { ReactNode } from "react";
 export default function HomeLayout ({ children }: { children: ReactNode }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head>
+
+        <link rel="preconnect" href="https://rsms.me/" />
+        <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+
+      </head>
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          "min-h-screen bg-background antialiased"
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="relative flex flex-col h-screen">
             <WebNavbarComp />
-            <main>
-              <div className="mx-auto">
+            <main className="black">
+              <div className="mx-auto dark">
               {children}
               </div>
             </main>
