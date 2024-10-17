@@ -52,7 +52,7 @@ export function NavbarComp() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="#" aria-current="page">
+                    <Link href="/dashboard" aria-current="page">
                         Checked In
                     </Link>
                 </NavbarItem>
