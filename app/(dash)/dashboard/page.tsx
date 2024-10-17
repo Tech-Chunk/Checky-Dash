@@ -10,6 +10,7 @@ import Sidebar from "@/components/Dashnavbar";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import { Avatar } from "@nextui-org/avatar";
 
 const list = [
   {
@@ -27,29 +28,43 @@ const list = [
 
 export default function Home() {
   return (
-    <div className="flex flex-row gap-4 md:flex-wrap">
-    <Card className="col-span-12 sm:col-span-4 h-100 w-">
-      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-        <h1 className=" font-medium text-3xl">Checked In</h1>
-      </CardHeader>
-    </Card>
-    <Card className="col-span-12 sm:col-span-4 h-[500px] w-[800px]">
-      <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-        <h1 className=" font-medium text-3xl">Recent Activity</h1>
-      </CardHeader>
-    </Card>
+    <div className="flex flex-wrap sm:flex-nowrap gap-4 justify-center align-middle">
+      <Card className="w-full sm:w-1/2 p-4" style={{ height: "66vh" }}>
+        <CardHeader className="absolute z-10 top-1 flex-col !items-start gap-4">
+          <h1 className="font-medium text-3xl">Checked In</h1>
 
-    <div className="gap-2 grid grid-cols-2 sm:grid-cols-8">
+          <Card className="w-[95%]">
+          <CardBody className="flex flex-row gap-4 p-4 content-center items-center justify-center">
+              <Avatar></Avatar>
+              <div className="flex flex-col gap-0">
+                <h1 className="text-xl">Person 1</h1>
+                <p className="text-sm">employee</p>
+              </div>
+              <div className="ml-auto flex items-center">
+                <h2 className="text-lg">9:15</h2>
+              </div>
+            </CardBody>
+          </Card>
 
-      
-
-      {list.map((item, index) => (
-        <div></div>
-      ))}
+          <Card className="w-[95%]">
+            <CardBody className="flex flex-row gap-4 p-4 content-center items-center justify-center">
+              <Avatar></Avatar>
+              <div className="flex flex-col gap-0">
+                <h1 className="text-xl">Person 1</h1>
+                <p className="text-sm">employee</p>
+              </div>
+              <div className="ml-auto flex items-center">
+                <h2 className="text-lg">9:15</h2>
+              </div>
+            </CardBody>
+          </Card>
+        </CardHeader>
+      </Card>
+      <Card className="w-full sm:w-1/2 p-4" style={{ height: "66vh" }}>
+        <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+          <h1 className="font-medium text-3xl">Recent Activity</h1>
+        </CardHeader>
+      </Card>
     </div>
-
-    </div>
-
-    
   );
 }
