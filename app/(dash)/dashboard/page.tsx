@@ -6,7 +6,7 @@ import { Code } from "@nextui-org/code";
 import { button as buttonStyles } from "@nextui-org/theme";
 import {Card, CardBody, CardFooter} from "@nextui-org/card";
 import {Image} from "@nextui-org/image"
-import Sidebar from "@/components/navbar";
+import Sidebar from "@/components/Dashnavbar";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
