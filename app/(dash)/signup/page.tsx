@@ -45,7 +45,7 @@ export default function HomePage() {
         <div className="wrapper flex justify-center content-center items-center		">
           <Card className="p-2 w-1/3 flex justify-center align-middle ">
             <CardHeader>
-              <h1 className="font-medium text-3xl">Login</h1>
+              <h1 className="font-medium text-3xl">Sign Up</h1>
             </CardHeader>
             <CardBody>
 
@@ -58,7 +58,7 @@ export default function HomePage() {
               <Checkbox defaultSelected>Remember me</Checkbox>
             </div>
             <div className="flex flex-col gap-2 justify-between pt-4">
-              <Button color="primary" type="submit" className="btn w-full" onClick={() => setIsLogin(isLogin)}>Login</Button>
+              <Button color="primary" type="submit" className="btn w-full" onClick={() => setIsLogin(!isLogin)}>Sign Up</Button>
               <Button  type="submit" className="btn w-full p-6" onClick={() => setIsLogin(isLogin)} startContent={<GoogleLogo/>}>Sign in with Google</Button>
 
             </div>

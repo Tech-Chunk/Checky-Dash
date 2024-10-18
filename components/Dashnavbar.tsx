@@ -39,7 +39,7 @@ export function NavbarComp() {
     };
 
     return (
-        <Navbar onMenuOpenChange={setIsMenuOpen}>
+        <Navbar onMenuOpenChange={setIsMenuOpen} isBordered>
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -52,7 +52,7 @@ export function NavbarComp() {
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="#" aria-current="page">
+                    <Link href="/dashboard" aria-current="page">
                         Checked In
                     </Link>
                 </NavbarItem>
@@ -98,7 +98,9 @@ export function NavbarComp() {
                         </DropdownMenu>
                     </Dropdown>
                 ) : (
-                    <Button>Login</Button>
+                    <Button color='primary'>Login</Button>
+                    
+                    
                 )}
             </NavbarContent>
 
