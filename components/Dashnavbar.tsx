@@ -57,18 +57,13 @@ export function NavbarComp() {
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="#" color="foreground">
+                    <Link href="/dashboard/analytics" color="foreground">
                         Analytics
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Map
-                    </Link>
-                </NavbarItem>
-                <NavbarItem>
-                    <Link color="foreground" href="#">
-                        Organisation Settings
+                    <Link color="foreground" href="/dashboard/settings">
+                    Settings
                     </Link>
                 </NavbarItem>
             </NavbarContent>
