@@ -1,8 +1,8 @@
 .banner{
     width: 100%;
     height: 100vh;
-    background: rgb(252,105,47);
-    background: linear-gradient(345deg, rgba(252,105,47,1) 31%, rgba(252,81,48,1) 72%);
+    background: rgb(135,206,235);
+    background: linear-gradient(142deg, rgba(135,206,235,1) 45%, rgba(69,179,224,1) 65%);
     background-size: cover;
     background-position: center;
 }
@@ -40,20 +40,22 @@
     width: 100%;
 }
 .content{
-    width: 100%;
+    width: 30%;
     position: absolute;
     top: 50%;
+    left: 100px;
     transform: translateY(-50%);
-    text-align: center;
-    color:#000000;
+    text-align: left;
+    color:#ffffff;
 }
 .content h1{
-    font-size: 70px;
+    font-size: 30px;
     margin-top: 80px;
 }
 .content p{
+    font-size: 20px;
     margin: 20px auto;
-    font-weight: 100;
+    
     line-height: 25px;
 }
 
@@ -68,3 +70,4 @@ span{
     z-index: -1;
     transition: 0.5s;
 }
+
