@@ -1,7 +1,8 @@
 .banner{
     width: 100%;
     height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0, 0, 0, 0.75)),url(/homepageImages/background.jpg);
+    background: rgb(135,206,235);
+    background: linear-gradient(142deg, rgba(135,206,235,1) 45%, rgba(69,179,224,1) 65%);
     background-size: cover;
     background-position: center;
 }
@@ -13,14 +14,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.logo{
-    width: 120px;
-    cursor: pointer;
-    padding: -20px;
-    left: 0;
-    bottom: -10px;
 
-}
 .navbar ul li{
     list-style: none;
     display: inline-block;
@@ -46,36 +40,25 @@
     width: 100%;
 }
 .content{
-    width: 100%;
+    width: 30%;
     position: absolute;
     top: 50%;
+    left: 100px;
     transform: translateY(-50%);
-    text-align: center;
-    color:#fff;
+    text-align: left;
+    color:#ffffff;
 }
 .content h1{
-    font-size: 70px;
+    font-size: 30px;
     margin-top: 80px;
 }
 .content p{
+    font-size: 20px;
     margin: 20px auto;
-    font-weight: 100;
+    
     line-height: 25px;
 }
-button{
-    width: 200px;
-    padding: 15px 0;
-    text-align: center;
-    margin: 20px 10px;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #56E39F;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
+
 span{
     background: #56E39F;
     height: 100%;
@@ -87,9 +70,4 @@ span{
     z-index: -1;
     transition: 0.5s;
 }
-button:hover span{
-    width: 100%;
-}
-button:hover{
-    border: none;
-}
+
