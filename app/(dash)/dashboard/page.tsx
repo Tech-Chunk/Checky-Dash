@@ -15,6 +15,8 @@ import { GithubIcon } from "@/components/icons";
 import { Avatar } from "@nextui-org/avatar";
 
 export default function Home() {
+
+  
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
