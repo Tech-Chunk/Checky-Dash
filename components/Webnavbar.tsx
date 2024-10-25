@@ -33,8 +33,8 @@ export function WebNavbarComp() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className=" dark fixed bg-transparent" isBordered>
-      <NavbarContent>
+    <Navbar onMenuOpenChange={setIsMenuOpen} className="light fixed bg-transparent" isBordered>
+      <NavbarContent >
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"

@@ -38,7 +38,7 @@ export default function HomeLayout ({ children }: { children: ReactNode }) {
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="relative flex flex-col h-screen">
             <WebNavbarComp />
-            <main className="black">
+            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               <div className="mx-auto dark">
               {children}
               </div>

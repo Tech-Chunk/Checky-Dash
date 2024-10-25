@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     background: rgb(135,206,235);
-    background: linear-gradient(142deg, rgba(135,206,235,1) 45%, rgba(69,179,224,1) 65%);
+    background: linear-gradient(142deg, rgb(255, 255, 255) 45%, rgb(241, 251, 255) 65%);
     background-size: cover;
     background-position: center;
 }
@@ -46,7 +46,7 @@
     left: 100px;
     transform: translateY(-50%);
     text-align: left;
-    color:#ffffff;
+    color:#000000;
 }
 .content h1{
     font-size: 30px;
