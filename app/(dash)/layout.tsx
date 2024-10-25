@@ -48,6 +48,7 @@ export default function RootLayout({
             <NavbarComp />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
+
             </main>
             <footer className="w-full flex items-center justify-center py-3">
               <Link
