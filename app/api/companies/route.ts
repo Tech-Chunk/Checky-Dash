@@ -26,7 +26,7 @@ export async function GET(request: Request) {
         const companiesSnapshot = await db.collection('companies').where('OWNER_ID', '==', uid).get();
 
         const companies = companiesSnapshot.docs.map(doc => ({
-            id: doc.id,
+            companyID: doc.id,
             ...doc.data(),
         }));
 
