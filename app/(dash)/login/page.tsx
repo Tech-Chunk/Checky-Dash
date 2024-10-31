@@ -26,21 +26,19 @@ export default function HomePage() {
     }, [value]);
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        try {
-          if (isLogin) {
-            await logIn(email, password);
-            alert('Login successful!');
-          } else {
-            await signUp(email, password);
-            alert('Sign up successful!');
-          }
-        } catch (error: any) {
-          alert(error.message);
+      e.preventDefault();
+      try {
+        if (isLogin) {
+          const user = await logIn(email, password);
+          alert('Login successful!');
+        } else {
+          await signUp(email, password);
+          alert('Sign up successful!');
         }
-      };
-
-
+      } catch (error: any) {
+        alert(error.message);
+      }
+    };
     return (
         <div className="wrapper flex justify-center content-center items-center		">
           <Card className="p-2 w-1/3 flex justify-center align-middle ">
