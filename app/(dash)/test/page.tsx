@@ -4,6 +4,7 @@ import { fetchCompanies } from '@/utils/fetchCompanys+Users';
 import { auth } from '@/libs/firebaseConfig';
 import { onAuthStateChanged } from 'firebase/auth';
 
+
 interface User {
   id: string;
   name: string;
