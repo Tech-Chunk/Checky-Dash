@@ -38,7 +38,7 @@ export default function Home() {
                   <p className="text-sm -mt-1 font-medium">Employee</p>
                 </div>
                 <div className="ml-auto flex items-center">
-                  <h2 className="text-xl font-semibold">9:15</h2>
+                  <h2 className="text-xl font-semibold">9:15</h2>fasd
                 </div>
               </CardBody>
             </Card>
