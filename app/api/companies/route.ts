@@ -17,22 +17,33 @@ const db = getFirestore();
 
 export async function GET(request: Request) {
     const auth = getAuth();
-    
     try {
-        const token = request.headers.get('Authorization')?.split(' ')[1]; // Expecting 'Bearer <token>'
+        const token = request.headers.get('Authorization')?.split(' ')[1];
         const decodedToken = await auth.verifyIdToken(token!);
         const uid = decodedToken.uid;
-
+        
         const companiesSnapshot = await db.collection('companies').where('OWNER_ID', '==', uid).get();
-
-        const companies = companiesSnapshot.docs.map(doc => ({
-            companyID: doc.id,
+        if (companiesSnapshot.empty) {
+            return NextResponse.json({ error: 'No companies found for this user' }, { status: 404 });
+        }
+        
+        const companyDoc = companiesSnapshot.docs[0];
+        const companyId = companyDoc.id;
+        
+        const usersSnapshot = await db.collection(`companies/${companyId}/users`)
+            .where('checked_in', '==', true)
+            .get();
+            
+        const users = usersSnapshot.docs.map(doc => ({
+            userID: doc.id,
             ...doc.data(),
+            checkInTime: doc.data().checkInTime?.toDate().toLocaleTimeString() || null
         }));
 
-        return NextResponse.json(companies);
+        const companyName = companyDoc.data().name;
+        return NextResponse.json({ companyId, companyName, users });
     } catch (error) {
-        console.error('Error fetching companies:', error);
-        return NextResponse.error();
+        console.error('Error fetching users in company:', error);
+        return NextResponse.json({ error: 'Error fetching users' }, { status: 500 });
     }
 }
