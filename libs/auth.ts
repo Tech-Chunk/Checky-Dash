@@ -1,10 +1,15 @@
 import { auth } from './firebaseConfig';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 
 export const signUp = async (email: string, password: string) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    return userCredential.user;
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      sendEmailVerification(user).then(() => {
+        alert('Verification email sent!');
+      });
+    })
   } catch (error) {
     console.error('Error signing up:', error);
     throw error;
