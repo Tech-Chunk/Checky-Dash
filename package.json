@@ -13,6 +13,7 @@
 		"@nextui-org/button": "2.0.38",
 		"@nextui-org/card": "^2.0.34",
 		"@nextui-org/checkbox": "^2.1.5",
+		"@nextui-org/chip": "^2.0.33",
 		"@nextui-org/code": "2.0.33",
 		"@nextui-org/dropdown": "^2.1.31",
 		"@nextui-org/image": "^2.0.32",
@@ -22,6 +23,7 @@
 		"@nextui-org/listbox": "2.1.27",
 		"@nextui-org/modal": "^2.0.41",
 		"@nextui-org/navbar": "2.0.37",
+		"@nextui-org/select": "^2.2.7",
 		"@nextui-org/skeleton": "^2.0.32",
 		"@nextui-org/snippet": "2.0.43",
 		"@nextui-org/switch": "2.0.34",
@@ -29,9 +31,12 @@
 		"@nextui-org/table": "^2.0.40",
 		"@nextui-org/tabs": "^2.0.37",
 		"@nextui-org/theme": "2.2.11",
+		"@nextui-org/tooltip": "^2.0.41",
+		"@nextui-org/user": "^2.0.34",
 		"@react-aria/ssr": "3.9.4",
 		"@react-aria/visually-hidden": "3.8.12",
 		"clsx": "2.1.1",
+		"country-list": "^2.3.0",
 		"firebase": "^10.14.1",
 		"firebase-admin": "^12.7.0",
 		"framer-motion": "~11.1.1",
@@ -40,7 +45,8 @@
 		"next": "14.2.4",
 		"next-themes": "^0.2.1",
 		"react": "18.3.1",
-		"react-dom": "18.3.1"
+		"react-dom": "18.3.1",
+		"world-countries": "^5.0.0"
 	},
 	"devDependencies": {
 		"@next/eslint-plugin-next": "^14.2.15",

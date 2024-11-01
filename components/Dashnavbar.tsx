@@ -9,6 +9,7 @@ import { Link } from "@nextui-org/link";
 import { auth } from '../libs/firebaseConfig'; 
 import { useRouter } from 'next/router';
 import { signOut } from 'firebase/auth';
+import { ThemeSwitch } from '@/components/theme-switch';
 
 const menuItems = [
     "Profile",
@@ -46,23 +47,23 @@ export function NavbarComp() {
                     className="sm:hidden"
                 />
                 <NavbarBrand>
-                    <p className="font-bold text-inherit">COMPANY NAME</p>
+                    <p className="font-bold text-inherit text-lg">COMPANY NAME</p>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
                 <NavbarItem isActive>
-                    <Link href="/dashboard" aria-current="page">
+                    <Link href="/dashboard" aria-current="page" className='text-lg'>
                         Checked In
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/dashboard/analytics" color="foreground">
+                    <Link href="/dashboard/analytics" color="foreground" className='text-lg'>
                         Analytics
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/dashboard/settings">
+                    <Link color="foreground" href="/dashboard/settings" className='text-lg'>
                     Settings
                     </Link>
                 </NavbarItem>
@@ -70,7 +71,7 @@ export function NavbarComp() {
 
             <NavbarContent as="div" justify="end">
                 {isAuthenticated ? (
-                    <Dropdown placement="bottom-end">
+                    <Dropdown placement="bottom-end" className='text-lg'>
                         <DropdownTrigger>
                             <Avatar
                                 isBordered
@@ -82,8 +83,8 @@ export function NavbarComp() {
                                 src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                             />
                         </DropdownTrigger>
-                        <DropdownMenu aria-label="Profile Actions" variant="flat">
-                            <DropdownItem key="profile" className="h-14 gap-2">
+                        <DropdownMenu aria-label="Profile Actions" variant="flat" className='text-lg' >
+                            <DropdownItem key="profile" className="h-14 gap-2" >
                                 <p className="font-semibold">Signed in as</p>
                                 <p className="font-semibold">zoey@example.com</p>
                             </DropdownItem>
@@ -97,6 +98,9 @@ export function NavbarComp() {
                     
                     
                 )}
+                <NavbarItem>
+                    <ThemeSwitch className="ml-4" />
+                </NavbarItem>
             </NavbarContent>
 
             <NavbarMenu>
