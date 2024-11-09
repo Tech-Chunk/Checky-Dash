@@ -25,7 +25,6 @@ interface Company {
 
 
 export default function Home() {
-
   
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [companies, setCompanies] = useState<Company | null>(null);
