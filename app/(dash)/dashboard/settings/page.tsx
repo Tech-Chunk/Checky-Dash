@@ -26,7 +26,7 @@ const statusColorMap: { [key: string]: string } = {
 
 type User = typeof users[0];
 
-
+   
 
 export default function Settings() {
   const [token, setToken] = useState<string>('');
