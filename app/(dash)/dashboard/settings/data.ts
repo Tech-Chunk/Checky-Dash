@@ -3,6 +3,8 @@ const columns = [
     {name: "STATUS", uid: "status"},
     {name: "ACTIONS", uid: "actions"},
   ];
+
+  
   
   const users = [
     {

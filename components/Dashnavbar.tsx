@@ -1,6 +1,6 @@
 "use client";
 import './sidebar.css';
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
 import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
@@ -26,11 +26,13 @@ const menuItems = [
 
 export function NavbarComp() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
 
     React.useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setIsAuthenticated(!!user); 
+            setUserEmail(user?.email || null);
         });
         return () => unsubscribe(); 
     }, []);
@@ -86,7 +88,7 @@ export function NavbarComp() {
                         <DropdownMenu aria-label="Profile Actions" variant="flat" className='text-lg' >
                             <DropdownItem key="profile" className="h-14 gap-2" >
                                 <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">zoey@example.com</p>
+                                <p className="font-semibold">{userEmail}</p>
                             </DropdownItem>
                             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                                 Log Out

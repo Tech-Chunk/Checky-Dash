@@ -16,6 +16,7 @@ import { Button } from "@nextui-org/button";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@nextui-org/modal";
 import {Link} from "@nextui-org/link"
 import { Input } from "@nextui-org/input";
+import { auth } from '../../../../libs/firebaseConfig'; 
 
 const statusColorMap: { [key: string]: string } = {
   active: "success",
@@ -30,12 +31,16 @@ type User = typeof users[0];
 
 export default function Settings() {
   const [token, setToken] = useState<string>('');
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      const token = user ? await user.getIdToken() : '';
       setToken(token);
-    }
+    });
+    return () => unsubscribe(); 
   }, []);
+
+  
   
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -43,7 +48,7 @@ export default function Settings() {
   async function addUser() {
     const email = document.getElementById('email') as HTMLInputElement;
     const name = document.getElementById('name') as HTMLInputElement;
-    
+     
     
     const response = await fetch('/api/companies', {
       method: 'POST',
