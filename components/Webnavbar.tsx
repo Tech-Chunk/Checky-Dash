@@ -33,7 +33,7 @@ export function WebNavbarComp() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen} className=" light fixed bg-transparent" isBordered>
+    <Navbar onMenuOpenChange={setIsMenuOpen} className=" dark fixed bg-transparent" maxWidth="full" isBlurred height={80}>
       <NavbarContent justify="start">
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -45,13 +45,13 @@ export function WebNavbarComp() {
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
+        <NavbarItem >
+          <Link href="#" aria-current="page" color="foreground" >
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/dashboard" color="foreground">
+          <Link href="/dashboard" color="foreground" >
             Dashboard
           </Link>
         </NavbarItem>
@@ -63,7 +63,7 @@ export function WebNavbarComp() {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+        <NavbarItem className="hidden lg:flex" >
           <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
