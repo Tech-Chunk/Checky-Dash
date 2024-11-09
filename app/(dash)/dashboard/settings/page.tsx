@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SettingsNav from "@/components/SettingsNavt";
 import { Card, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
+import { fetchCompanies } from "@/utils/fetchCompanys+Users";
 import { User } from "@nextui-org/user";
 import { Tooltip } from "@nextui-org/tooltip";
 import { Chip } from "@nextui-org/chip";
@@ -22,11 +23,40 @@ const statusColorMap: { [key: string]: string } = {
   vacation: "warning",
 };
 
+
 type User = typeof users[0];
 
+   
+
 export default function Settings() {
+  const [token, setToken] = useState<string>('');
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setToken(token);
+    }
+  }, []);
   
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+
+  async function addUser() {
+    const email = document.getElementById('email') as HTMLInputElement;
+    const name = document.getElementById('name') as HTMLInputElement;
+    
+    
+    const response = await fetch('/api/companies', {
+      method: 'POST',
+      headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          email: email.value,
+          name: name.value
+      })
+  });
+  }
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
     const cellValue = user[columnKey as keyof User];
@@ -109,13 +139,13 @@ export default function Settings() {
               <ModalBody>
                 <Input
                   autoFocus
-              
+                  id="name"
                   label="Name"
                   placeholder="Enter Employee name"
                   variant="bordered"
                 />
                 <Input
-          
+                  id="email"
                   label="Email"
                   placeholder="Enter employee email"
                   variant="bordered"
@@ -126,7 +156,7 @@ export default function Settings() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={onClose}>
+                <Button color="primary" onPress={() => addUser()}>
                   Add User
                 </Button>
               </ModalFooter>
@@ -168,3 +198,5 @@ export default function Settings() {
     </div>
   );
 }
+
+

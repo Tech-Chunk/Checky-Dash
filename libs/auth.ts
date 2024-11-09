@@ -16,7 +16,6 @@ export const logIn = async (email: string, password: string) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const token = await userCredential.user.getIdToken();
 
-    // Fetch companies owned by the user
     const response = await fetch('/api/companies', {
       method: 'GET',
       headers: {
@@ -29,7 +28,7 @@ export const logIn = async (email: string, password: string) => {
     }
 
     const companies = await response.json();
-    console.log('User companies:', companies); // Handle the fetched companies as needed
+    console.log('User companies:', companies);
 
     return userCredential.user;
   } catch (error) {

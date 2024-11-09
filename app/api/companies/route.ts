@@ -1,6 +1,7 @@
+// route.ts
 import { NextResponse } from 'next/server';
-import { initializeApp, getApps, cert } from 'firebase-admin/app';
-import { getFirestore } from 'firebase-admin/firestore';
+import { getApps, initializeApp, cert } from 'firebase-admin/app';
+import { getFirestore, Timestamp } from 'firebase-admin/firestore';
 import { getAuth } from 'firebase-admin/auth';
 
 if (!getApps().length) {
@@ -15,35 +16,37 @@ if (!getApps().length) {
 
 const db = getFirestore();
 
-export async function GET(request: Request) {
+
+export async function POST(request: Request) {
     const auth = getAuth();
     try {
         const token = request.headers.get('Authorization')?.split(' ')[1];
         const decodedToken = await auth.verifyIdToken(token!);
         const uid = decodedToken.uid;
-        
+
+        const { email, name } = await request.json();
+
         const companiesSnapshot = await db.collection('companies').where('OWNER_ID', '==', uid).get();
         if (companiesSnapshot.empty) {
             return NextResponse.json({ error: 'No companies found for this user' }, { status: 404 });
         }
         
-        const companyDoc = companiesSnapshot.docs[0];
-        const companyId = companyDoc.id;
-        
-        const usersSnapshot = await db.collection(`companies/${companyId}/users`)
-            .where('checked_in', '==', true)
-            .get();
-            
-        const users = usersSnapshot.docs.map(doc => ({
-            userID: doc.id,
-            ...doc.data(),
-            checkInTime: doc.data().checkInTime?.toDate().toLocaleTimeString() || null
-        }));
+        const companyId = companiesSnapshot.docs[0].id;
 
-        const companyName = companyDoc.data().name;
-        return NextResponse.json({ companyId, companyName, users });
+        const userRef = await db.collection('companies').doc(companyId).collection('users').add({
+            email,
+            name,
+            checked_in: false,
+            created_on: Timestamp.now()
+        });
+
+        return NextResponse.json({ 
+            success: true, 
+            userId: userRef.id 
+        }, { status: 201 });
+
     } catch (error) {
-        console.error('Error fetching users in company:', error);
-        return NextResponse.json({ error: 'Error fetching users' }, { status: 500 });
+        console.error('Error adding user:', error);
+        return NextResponse.json({ error: 'Failed to add user' }, { status: 500 });
     }
 }
