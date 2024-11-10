@@ -35,10 +35,10 @@ export default function HomeLayout ({ children }: { children: ReactNode }) {
           "min-h-screen bg-background antialiased"
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             <WebNavbarComp />
-            <main className="black">
+            <main className=" black">
               <div className="mx-auto dark">
               {children}
               </div>
