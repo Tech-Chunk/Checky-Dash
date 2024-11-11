@@ -2,12 +2,12 @@ import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
-
+import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "../(Main)/providers";
 import { NavbarComp } from "@/components/Dashnavbar"
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-
+import { ThemeProvider } from "@/components/theme-provider";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -47,9 +47,11 @@ export default function RootLayout({
           <div className="relative flex flex-col h-screen">
             <NavbarComp />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+
               {children}
 
             </main>
+            <Toaster />
             <footer className="w-full flex items-center justify-center py-3">
               <Link
                 isExternal

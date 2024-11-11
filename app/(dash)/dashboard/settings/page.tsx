@@ -17,6 +17,7 @@ import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure
 import {Link} from "@nextui-org/link"
 import { Input } from "@nextui-org/input";
 import { auth } from '../../../../libs/firebaseConfig'; 
+import { useToast } from "@/hooks/use-toast"
 
 const statusColorMap: { [key: string]: string } = {
   active: "success",
@@ -31,24 +32,30 @@ type User = typeof users[0];
 
 export default function Settings() {
   const [token, setToken] = useState<string>('');
+  const { toast } = useToast()
+  const [visible, setVisible] = useState(false);
+  const closeModal = () => setVisible(false);
+
 
   useEffect(() => {
+
     const unsubscribe = auth.onAuthStateChanged(async user => {
       const token = user ? await user.getIdToken() : '';
       setToken(token);
     });
+
+
     return () => unsubscribe(); 
   }, []);
 
   
   
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+  
 
   async function addUser() {
     const email = document.getElementById('email') as HTMLInputElement;
     const name = document.getElementById('name') as HTMLInputElement;
-     
     
     const response = await fetch('/api/companies', {
       method: 'POST',
@@ -61,6 +68,15 @@ export default function Settings() {
           name: name.value
       })
   });
+    if (response.status === 201) {
+
+    onClose
+    toast({
+      title: "test",
+      description: "fri",
+    })
+    } 
+
   }
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
@@ -161,7 +177,7 @@ export default function Settings() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={() => addUser()}>
+                <Button color="primary" onPress={() => { addUser(); onClose(); }}>
                   Add User
                 </Button>
               </ModalFooter>

@@ -21,4 +21,11 @@ html, body {
 .main {
     justify-content: center;
 }
+  
+
+@layer base {
+  :root {
+        --radius: 0.5rem;
+    }
+}
 
