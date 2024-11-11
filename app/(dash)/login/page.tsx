@@ -8,6 +8,9 @@ import {Checkbox} from "@nextui-org/checkbox";
 import {Button} from "@nextui-org/button"
 import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@nextui-org/modal";
 import { GoogleLogo } from "@/components/GoogleLogo";
+import { toast, useToast } from "@/hooks/use-toast"
+import { useRouter } from 'next/navigation'
+
 export default function HomePage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,6 +18,7 @@ export default function HomePage() {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [isVisible, setIsVisible] = React.useState(false);
     const toggleVisibility = () => setIsVisible(!isVisible);
+    const router = useRouter()
 
     const [value, setValue] = React.useState("junior2nextui.org");
     const validateEmail = (value: string) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
@@ -28,12 +32,19 @@ export default function HomePage() {
     const handleSubmit = async (e: any) => {
       e.preventDefault();
       try {
+
         if (isLogin) {
           const user = await logIn(email, password);
-          alert('Login successful!');
+          toast({
+            title: "Logged In",
+          })
+          router.push('/dashboard')
         } else {
           await signUp(email, password);
-          alert('Sign up successful!');
+          toast({
+            title: "Signed up",
+          })        
+          router.push('/dashboard')
         }
       } catch (error: any) {
         alert(error.message);

@@ -7,9 +7,10 @@ import { Avatar } from '@nextui-org/avatar';
 import { Button } from "@nextui-org/button"; 
 import { Link } from "@nextui-org/link";
 import { auth } from '../libs/firebaseConfig'; 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { ThemeSwitch } from '@/components/theme-switch';
+import { toast } from '@/hooks/use-toast';
 
 const menuItems = [
     "Profile",
@@ -28,6 +29,7 @@ export function NavbarComp() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const router = useRouter()
 
     React.useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
@@ -39,6 +41,11 @@ export function NavbarComp() {
 
     const handleLogout = async () => {
         await signOut(auth);
+        toast
+        router.push("/login")
+        toast({
+            title: "Signed out"
+        })
     };
 
     return (
@@ -96,8 +103,9 @@ export function NavbarComp() {
                         </DropdownMenu>
                     </Dropdown>
                 ) : (
+                    <Link href='/login'>
                     <Button color='primary'>Login</Button>
-                    
+                    </Link>
                     
                 )}
                 <NavbarItem>
