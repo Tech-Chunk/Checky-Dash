@@ -10,6 +10,9 @@ import {Divider} from "@nextui-org/divider";
 
 interface OnboardingStepProps {
   onNext: () => void;
+  companyData?: any;
+  onDataChange?: (field: string, value: any) => void;
+  token?: string;  // Add this line
 }
 
 const popularCountryCodes = ["US", "GB", "CA", "AU", "DE", "FR", "JP", "CN", "IN"]; // Add more as needed
@@ -55,7 +58,7 @@ const WelcomeComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
 );
 
 // Feature Component
-const FeatureComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
+const FeatureComponent: React.FC<OnboardingStepProps> = ({ onNext, companyData, onDataChange }) => (
   <motion.div 
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
@@ -69,7 +72,14 @@ const FeatureComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
           <h1 className='text-4xl font-semibold'>Company Name</h1>
           <h3 className='text-2xl'>What is your Companies name?</h3>
         </div>
-        <Input type="Company Name" variant="faded" label="Company Name" size='lg'/>
+        <Input 
+          type="text"
+          value={companyData?.companyName}
+          onChange={(e) => onDataChange?.('companyName', e.target.value)}
+          variant="faded" 
+          label="Company Name" 
+          size='lg'
+        />
         </div>
         <Button onClick={onNext} color="primary" size='lg' className='mt-4'>Continue</Button>
       </div>
@@ -77,7 +87,7 @@ const FeatureComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
   </motion.div>
 );
 
-const RegionComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
+const RegionComponent: React.FC<OnboardingStepProps> = ({ onNext, companyData, onDataChange }) => (
   <motion.div 
     initial={{ opacity: 0, y: 50 }}
     animate={{ opacity: 1, y: 0 }}
@@ -91,7 +101,13 @@ const RegionComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
             <h1 className='text-4xl font-semibold'>Company Region</h1>
             <h3 className='text-2xl'>Where are you located?</h3>
           </div>
-          <Select label="Country" className="max-w-xs" size='lg'>
+          <Select 
+            label="Country" 
+            className="max-w-xs" 
+            size='lg'
+            value={companyData?.region}
+            onChange={(e) => onDataChange?.('region', e.target.value)}
+          >
             {countryOptions.map((country) => (
               <SelectItem key={country.key} value={country.key}>
                 {country.label}
@@ -104,7 +120,7 @@ const RegionComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
     </div>
   </motion.div>
 );
-const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
+const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext, companyData, onDataChange }) => (
 
   <motion.div 
     initial={{ opacity: 0, y: 50 }}
@@ -127,7 +143,16 @@ const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
             <h1 className='text-5xl font-semibold'>Free</h1>
           </CardHeader>
           <CardFooter className='flex justify-center'>
-            <Button className='w-full' onClick={onNext}>Continue</Button>
+            <Button 
+              className='w-full' 
+              onClick={() => {
+                console.log('Plan selected: free'); // Debug log
+                onDataChange?.('plan', 'free');
+                onNext();  // This will trigger submission since it's the last step
+              }}
+            >
+              Submit
+            </Button>
           </CardFooter>
         </Card>
         <Card isBlurred className='w-1/4 p-5'  shadow="sm">
@@ -144,7 +169,16 @@ const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
             </div>
           </CardHeader>
           <CardFooter className='flex justify-center'>
-            <Button className='w-full' color='primary'>Buy Now</Button>
+            <Button 
+              className='w-full' 
+              color='primary'
+              onClick={() => {
+                onDataChange?.('plan', 'pro');
+                onNext();  // This will trigger submission since it's the last step
+              }}
+            >
+              Submit
+            </Button>
           </CardFooter>
         </Card>
 
@@ -157,19 +191,30 @@ const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext }) => (
 );
 
 
-const OnboardingPage: React.FC = () => {
-const [step, setStep] = useState(0);
+const OnboardingPage: React.FC<{
+  companyData: any;
+  onDataChange: (field: string, value: any) => void;
+  onSubmit: () => void;
+  token: string;  // Add this line
+}> = ({ companyData, onDataChange, onSubmit, token }) => {
+  const [step, setStep] = useState(0);
 
-  const nextStep = () => setStep((prevStep) => prevStep + 1);
+  const nextStep = () => {
+    if (step === 3) {
+      console.log('Triggering submit at step 3'); // Debug log
+      onSubmit(); // This will be called when plan is selected
+    } else {
+      setStep((prevStep) => prevStep + 1);
+    }
+  };
 
   return (
     <div className="onboarding-container">
       <AnimatePresence mode="wait">
         {step === 0 && <WelcomeComponent key="Welcome" onNext={nextStep} />}
-        {step === 1 && <FeatureComponent key="Company Name" onNext={nextStep} />}
-        {step === 2 && <RegionComponent key="Region" onNext={nextStep} />}
-        {step === 3 && <PlanComponent key="Plan" onNext={nextStep} />}
-
+        {step === 1 && <FeatureComponent key="Company Name" onNext={nextStep} companyData={companyData} onDataChange={onDataChange} />}
+        {step === 2 && <RegionComponent key="Region" onNext={nextStep} companyData={companyData} onDataChange={onDataChange} />}
+        {step === 3 && <PlanComponent key="Plan" onNext={nextStep} companyData={companyData} onDataChange={onDataChange} />}
       </AnimatePresence>
     </div>
   );
