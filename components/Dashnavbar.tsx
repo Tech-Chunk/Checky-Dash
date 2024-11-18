@@ -7,10 +7,12 @@ import { Avatar } from '@nextui-org/avatar';
 import { Button } from "@nextui-org/button"; 
 import { Link } from "@nextui-org/link";
 import { auth } from '../libs/firebaseConfig'; 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { ThemeSwitch } from '@/components/theme-switch';
 import { toast } from '@/hooks/use-toast';
+import { fetchCompanies } from '@/utils/fetchCompanys+Users';
+
 
 const menuItems = [
     "Profile",
@@ -25,16 +27,38 @@ const menuItems = [
     "Log Out",
 ];
 
+async function getCompanyName(token: string): Promise<string | undefined> {
+    try {
+      const companyData = await fetchCompanies(token);
+      const companyName = companyData.companyName;
+      console.log('Company Name:', companyName);
+      return companyName;
+    } catch (error) {
+      console.error('Error getting company name:', error);
+      return undefined;
+    }
+  }
+
+
+
 export function NavbarComp() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
-    const router = useRouter()
+    const [token, setToken] = useState<string>('');
+    const [companyName, setCompanyName] = useState<string | undefined>(undefined);
+
+    const router = useRouter()  
+    const pathname = usePathname()
+
 
     React.useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        const unsubscribe = auth.onAuthStateChanged(async user => {
             setIsAuthenticated(!!user); 
             setUserEmail(user?.email || null);
+            const token = user ? await user.getIdToken() : '';
+            setToken(token);
+
         });
         return () => unsubscribe(); 
     }, []);
@@ -48,31 +72,44 @@ export function NavbarComp() {
         })
     };
 
+
+
+    getCompanyName(token).then(companyName => {
+        if (companyName) {
+            setCompanyName(companyName);
+        } else {
+          console.log('Failed to fetch company name.');
+        }
+      });
+    
+
+    const namepfp = userEmail?.charAt(0).toUpperCase();
+    const isLinkActive = (href: string) => pathname === href
+
     return (
         <Navbar onMenuOpenChange={setIsMenuOpen} isBordered>
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                    className="sm:hidden"
-                />
+                    className="sm:hidden"></NavbarMenuToggle>
+                    <p className="font-bold text-inherit text-lg">{companyName || 'Company'}</p>
                 <NavbarBrand>
-                    <p className="font-bold text-inherit text-lg">COMPANY NAME</p>
                 </NavbarBrand>
             </NavbarContent>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem isActive>
-                    <Link href="/dashboard" aria-current="page" className='text-lg'>
+                <NavbarItem >
+                    <Link href="/dashboard" aria-current="page" className='text-lg' color={isLinkActive('/dashboard') ? 'primary' : 'foreground'}  >
                         Checked In
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link href="/dashboard/analytics" color="foreground" className='text-lg'>
+                    <Link href="/dashboard/analytics" color={isLinkActive('/dashboard/analytics') ? 'primary' : 'foreground'} className='text-lg'>
                         Analytics
                     </Link>
                 </NavbarItem>
                 <NavbarItem>
-                    <Link color="foreground" href="/dashboard/settings" className='text-lg'>
+                    <Link color={isLinkActive('/dashboard/settings') ? 'primary' : 'foreground'} href="/dashboard/settings" className='text-lg'>
                     Settings
                     </Link>
                 </NavbarItem>
@@ -83,13 +120,10 @@ export function NavbarComp() {
                     <Dropdown placement="bottom-end" className='text-lg'>
                         <DropdownTrigger>
                             <Avatar
-                                isBordered
                                 as="button"
                                 className="transition-transform"
-                                color="secondary"
-                                name="User Name"
+                                name={namepfp}
                                 size="sm"
-                                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
                             />
                         </DropdownTrigger>
                         <DropdownMenu aria-label="Profile Actions" variant="flat" className='text-lg' >
@@ -134,3 +168,7 @@ export function NavbarComp() {
 }
 
 export default NavbarComp;
+function GetUsers() {
+    throw new Error('Function not implemented.');
+}
+
