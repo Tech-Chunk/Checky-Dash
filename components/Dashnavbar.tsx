@@ -1,15 +1,16 @@
 "use client";
 import './sidebar.css';
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
 import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu } from '@nextui-org/dropdown';
 import { Avatar } from '@nextui-org/avatar';
 import { Button } from "@nextui-org/button"; 
 import { Link } from "@nextui-org/link";
 import { auth } from '../libs/firebaseConfig'; 
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { ThemeSwitch } from '@/components/theme-switch';
+import { toast } from '@/hooks/use-toast';
 
 const menuItems = [
     "Profile",
@@ -26,17 +27,25 @@ const menuItems = [
 
 export function NavbarComp() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [userEmail, setUserEmail] = useState<string | null>(null);
     const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+    const router = useRouter()
 
     React.useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             setIsAuthenticated(!!user); 
+            setUserEmail(user?.email || null);
         });
         return () => unsubscribe(); 
     }, []);
 
     const handleLogout = async () => {
         await signOut(auth);
+        toast
+        router.push("/login")
+        toast({
+            title: "Signed out"
+        })
     };
 
     return (
@@ -86,7 +95,7 @@ export function NavbarComp() {
                         <DropdownMenu aria-label="Profile Actions" variant="flat" className='text-lg' >
                             <DropdownItem key="profile" className="h-14 gap-2" >
                                 <p className="font-semibold">Signed in as</p>
-                                <p className="font-semibold">zoey@example.com</p>
+                                <p className="font-semibold">{userEmail}</p>
                             </DropdownItem>
                             <DropdownItem key="logout" color="danger" onClick={handleLogout}>
                                 Log Out
@@ -94,8 +103,9 @@ export function NavbarComp() {
                         </DropdownMenu>
                     </Dropdown>
                 ) : (
+                    <Link href='/login'>
                     <Button color='primary'>Login</Button>
-                    
+                    </Link>
                     
                 )}
                 <NavbarItem>

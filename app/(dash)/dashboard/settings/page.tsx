@@ -11,39 +11,53 @@ import { EditIcon } from "@/components/icons/EditIcon";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
 import { EyeIcon } from "@/components/icons/EyeIcon";
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
-import { columns, users } from "./data";
+import { columns, FormatedUsers, GetUsers} from "./data";
 import { Button } from "@nextui-org/button";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@nextui-org/modal";
 import {Link} from "@nextui-org/link"
 import { Input } from "@nextui-org/input";
+import { auth } from '../../../../libs/firebaseConfig'; 
+import { useToast } from "@/hooks/use-toast"
+import { Pagination } from "@nextui-org/pagination";
 
 const statusColorMap: { [key: string]: string } = {
   active: "success",
   paused: "danger",
   vacation: "warning",
+  checkedIn: "primary",
+  checkedOut: "secondary",
 };
-
-
-type User = typeof users[0];
-
-   
 
 export default function Settings() {
   const [token, setToken] = useState<string>('');
+  const [formatedUsers, setFormatedUsers] = useState(FormatedUsers);
+  const { toast } = useToast();
+  const [visible, setVisible] = useState(false);
+  const closeModal = () => setVisible(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  const paginatedUsers = formatedUsers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      const token = user ? await user.getIdToken() : '';
       setToken(token);
-    }
+      
+      const users = await GetUsers(token);
+      setFormatedUsers(users);
+    });
+    return () => unsubscribe();
   }, []);
+
+  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
   
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
-
   async function addUser() {
     const email = document.getElementById('email') as HTMLInputElement;
     const name = document.getElementById('name') as HTMLInputElement;
-    
     
     const response = await fetch('/api/companies', {
       method: 'POST',
@@ -56,6 +70,15 @@ export default function Settings() {
           name: name.value
       })
   });
+    if (response.status === 201) {
+      onClose();
+      toast({
+        title: "User added",
+        description: "The user has been successfully added.",
+      });
+      const users = await GetUsers(token);
+      setFormatedUsers(users);
+    } 
   }
 
   const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
@@ -80,8 +103,9 @@ export default function Settings() {
           </div>
         );
       case "status":
+        const statusColor = user.checkedIn ? "success" : "default";
         return (
-          <Chip className="capitalize" size="sm" variant="flat">
+          <Chip className="capitalize" size="sm" variant="flat" color={statusColor}>
             {cellValue}
           </Chip>
         );
@@ -156,7 +180,7 @@ export default function Settings() {
                 <Button color="danger" variant="flat" onPress={onClose}>
                   Close
                 </Button>
-                <Button color="primary" onPress={() => addUser()}>
+                <Button color="primary" onPress={() => { addUser(); onClose(); }}>
                   Add User
                 </Button>
               </ModalFooter>
@@ -177,7 +201,7 @@ export default function Settings() {
               </TableColumn>
             )}
           </TableHeader>
-          <TableBody items={users}>
+          <TableBody items={paginatedUsers}>
             {(item) => (
               <TableRow key={item.id}>
                 {(columnKey) => (
@@ -193,6 +217,12 @@ export default function Settings() {
             )}
           </TableBody>
         </Table>
+        <Pagination
+          total={Math.ceil(formatedUsers.length / itemsPerPage)}
+          initialPage={1}
+          onChange={(page) => setCurrentPage(page)}
+          className="mt-4 self-center"
+        />
    
       </div>
     </div>
