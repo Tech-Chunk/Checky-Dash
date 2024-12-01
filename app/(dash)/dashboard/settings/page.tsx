@@ -5,13 +5,33 @@ import { Card, CardHeader } from "@nextui-org/card";
 import { Divider } from "@nextui-org/divider";
 import { fetchCompanies } from "@/utils/fetchCompanys+Users";
 import { User } from "@nextui-org/user";
+
+interface UserProps {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  role?: string;
+  team?: string;
+  checkedIn?: boolean;
+}
 import { Tooltip } from "@nextui-org/tooltip";
 import { Chip } from "@nextui-org/chip";
 import { EditIcon } from "@/components/icons/EditIcon";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
 import { EyeIcon } from "@/components/icons/EyeIcon";
 import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
-import { columns, FormatedUsers, GetUsers} from "./data";
+import { columns, FormatedUsers, GetUsers } from "./data";
+
+interface UserProps {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  role?: string;
+  team?: string;
+  checkedIn?: boolean;
+}
 import { Button } from "@nextui-org/button";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@nextui-org/modal";
 import {Link} from "@nextui-org/link"
@@ -38,9 +58,15 @@ export default function Settings() {
   const itemsPerPage = 10;
 
   const paginatedUsers = formatedUsers.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
+          (currentPage - 1) * itemsPerPage,
+          currentPage * itemsPerPage
+        ).map((user: UserProps) => ({
+          ...user,
+          avatar: user.avatar || '',
+          role: user.role || '',
+          team: user.team || '',
+          checkedIn: user.checkedIn || false,
+        }));
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async user => {
@@ -53,7 +79,7 @@ export default function Settings() {
     return () => unsubscribe();
   }, []);
 
-  const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   
   async function addUser() {
     const email = document.getElementById('email') as HTMLInputElement;
@@ -81,8 +107,8 @@ export default function Settings() {
     } 
   }
 
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+  const renderCell = React.useCallback((user: UserProps, columnKey: React.Key) => {
+    const cellValue = user[columnKey as keyof UserProps];
 
     switch (columnKey) {
       case "name":
@@ -201,7 +227,7 @@ export default function Settings() {
               </TableColumn>
             )}
           </TableHeader>
-          <TableBody items={paginatedUsers}>
+          <TableBody items={paginatedUsers as UserProps[]}>
             {(item) => (
               <TableRow key={item.id}>
                 {(columnKey) => (

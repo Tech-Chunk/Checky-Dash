@@ -35,7 +35,7 @@ export const fetchCompanies = async (token: string): Promise<CompanyData> => {
 
     // Validate data structure and checked_in property
     if (data && data.companyId && data.companyName && Array.isArray(data.users)) {
-      const validatedUsers = data.users.map(user => ({
+      const validatedUsers = data.users.map((user: User) => ({
         ...user,
         checked_in: Boolean(user.checked_in)
       }));
