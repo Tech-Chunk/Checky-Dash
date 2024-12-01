@@ -2,7 +2,7 @@
 
 This is a dashboard for the check in app Checky.
 
-## Whats checky
+## Whats Checky
 Currently checky is a basic check in app built using vue, this website is built in nextjs and acts as a dashboard to checky
 
 ## Features
