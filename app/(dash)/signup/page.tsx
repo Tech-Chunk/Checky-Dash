@@ -37,10 +37,9 @@ export default function HomePage() {
         try {
           if (isLogin) {
             await logIn(email, password);
-            alert('Login successful!');
           } else {
             await signUp(email, password);
-            alert('Sign up successful!');
+   
           }
         } catch (error: any) {
           alert(error.message);

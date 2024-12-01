@@ -67,7 +67,7 @@ export function WebNavbarComp() {
           <Link href="/login">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <Button as={Link} color="primary" href="/signup" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>
@@ -84,7 +84,7 @@ export function WebNavbarComp() {
                   : "foreground"
               }
               className="w-full"
-              href="#"
+              href="/signup"
               size="lg"
             >
               {item}
