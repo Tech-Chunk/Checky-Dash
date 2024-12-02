@@ -35,7 +35,7 @@
 		"@nextui-org/tooltip": "^2.0.41",
 		"@nextui-org/user": "^2.0.34",
 		"@radix-ui/react-toast": "^1.2.2",
-		"@react-aria/ssr": "3.9.4",
+		"@react-aria/ssr": "3.9.7",
 		"@react-aria/visually-hidden": "3.8.12",
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.1",
