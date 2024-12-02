@@ -11,7 +11,7 @@ export default function HomePage() {
           <Link href="/dashboard">
           <Chip>Explore Checky V1</Chip>
           </Link>
-          <h1 className="text-5xl font-bold">Modernize your Workplace</h1>
+          <h1 className="text-5xl font-bold">Modernise your Workplace</h1>
         </div>
         <h3 className="text-lg text-center w-2/3">
           A Simple, Modern and Efficient way of tracking employee registration in the office
