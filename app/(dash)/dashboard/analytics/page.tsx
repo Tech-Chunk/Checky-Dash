@@ -9,7 +9,7 @@ export default function Analytics() {
         <div className="flex flex-col gap-5">
             <div className="flex flex-row gap-2">
                 <Card className="pl-4 pr-10">
-                    <CardHeader className="z-10 top-1 flex-col !items-start gap-1">
+                    <CardHeader className="z-10 top-1 flex-col items-start! gap-1">
                         <h1 className="font-bold">Busiest Day</h1>
                         <div className="flex flex-col">
                             <p>5th Oct ‘25</p>
@@ -17,7 +17,7 @@ export default function Analytics() {
                     </CardHeader>
                 </Card>
                 <Card className="pl-4 pr-10">
-                    <CardHeader className="z-10 top-1 flex-col !items-start gap-1">
+                    <CardHeader className="z-10 top-1 flex-col items-start! gap-1">
                         <h1 className="font-bold">Average Attendance</h1>
                         <div className="flex flex-col">
                             <p>97%</p>

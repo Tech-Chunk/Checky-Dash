@@ -135,7 +135,7 @@ const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext, companyData, onD
         <p className='text-xl'>Find the plan for you</p>
       </div>
       <div className='flex flex-row justify-center gap-3'>
-        <Card isBlurred className='w-1/4 p-5'  shadow="sm">
+        <Card isBlurred className='w-1/4 p-5'  shadow-sm="sm">
           <CardHeader className='flex flex-col items-start'>
             <h2 className='text-3xl font-medium'>Visitor</h2>
             <p className='w-5/8 text-gray-600 text-medium'>For Small Businesses keeping track of incoming visitors</p>
@@ -155,7 +155,7 @@ const PlanComponent: React.FC<OnboardingStepProps> = ({ onNext, companyData, onD
             </Button>
           </CardFooter>
         </Card>
-        <Card isBlurred className='w-1/4 p-5'  shadow="sm">
+        <Card isBlurred className='w-1/4 p-5'  shadow-sm="sm">
           <CardHeader className='flex flex-col items-start'>
             <h2 className='text-3xl font-medium'>Pro</h2>
             <p className='w-5/8 text-gray-600 text-medium'>For Businesses looking to streamline employees</p>
