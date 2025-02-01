@@ -10,13 +10,7 @@ import {
   NavbarMenu,
   NavbarMenuItem,
 } from "@heroui/navbar";
-import {
-  DropdownItem,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-} from "@heroui/dropdown";
-import { Avatar } from "@heroui/avatar";
+
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import {CheckyLogo } from "@/components/CheckyLogo"
