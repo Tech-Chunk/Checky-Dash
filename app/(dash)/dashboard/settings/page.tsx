@@ -1,24 +1,24 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SettingsNav from "@/components/SettingsNavt";
-import { Card, CardHeader } from "@nextui-org/card";
-import { Divider } from "@nextui-org/divider";
+import { Card, CardHeader } from "@heroui/card";
+import { Divider } from "@heroui/divider";
 import { fetchCompanies } from "@/utils/fetchCompanys+Users";
-import { User } from "@nextui-org/user";
-import { Tooltip } from "@nextui-org/tooltip";
-import { Chip } from "@nextui-org/chip";
+import { User } from "@heroui/user";
+import { Tooltip } from "@heroui/tooltip";
+import { Chip } from "@heroui/chip";
 import { EditIcon } from "@/components/icons/EditIcon";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
 import { EyeIcon } from "@/components/icons/EyeIcon";
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@heroui/table";
 import { columns, FormatedUsers, GetUsers} from "./data";
-import { Button } from "@nextui-org/button";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@nextui-org/modal";
-import {Link} from "@nextui-org/link"
-import { Input } from "@nextui-org/input";
+import { Button } from "@heroui/button";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@heroui/modal";
+import {Link} from "@heroui/link"
+import { Input } from "@heroui/input";
 import { auth } from '../../../../libs/firebaseConfig'; 
 import { useToast } from "@/hooks/use-toast"
-import { Pagination } from "@nextui-org/pagination";
+import { Pagination } from "@heroui/pagination";
 
 const statusColorMap: { [key: string]: string } = {
   active: "success",

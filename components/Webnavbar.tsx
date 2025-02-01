@@ -9,16 +9,16 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-} from "@nextui-org/navbar";
+} from "@heroui/navbar";
 import {
   DropdownItem,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
-} from "@nextui-org/dropdown";
-import { Avatar } from "@nextui-org/avatar";
-import { Button } from "@nextui-org/button";
-import { Link } from "@nextui-org/link";
+} from "@heroui/dropdown";
+import { Avatar } from "@heroui/avatar";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
 import {CheckyLogo } from "@/components/CheckyLogo"
 
 const menuItems = [
