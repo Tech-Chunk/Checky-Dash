@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
+import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { Toaster } from "@/components/ui/toaster"
 import { Providers } from "../(Main)/providers";

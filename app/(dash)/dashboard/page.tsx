@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Skeleton } from "@heroui/skeleton";
-import { Button, ButtonGroup } from "@heroui/button";
-import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@heroui/modal";
-import {Avatar, AvatarGroup, AvatarIcon} from "@heroui/avatar";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Skeleton } from "@nextui-org/skeleton";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@nextui-org/modal";
+import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/libs/firebaseConfig';

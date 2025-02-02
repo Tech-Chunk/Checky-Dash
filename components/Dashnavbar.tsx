@@ -1,11 +1,11 @@
 "use client";
 import './sidebar.css';
 import React, { useState } from "react";
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@heroui/navbar";
-import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu } from "@heroui/dropdown";
-import { Avatar } from "@heroui/avatar";
-import { Button } from "@heroui/button"; 
-import { Link } from "@heroui/link";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/navbar";
+import { DropdownItem, DropdownTrigger, Dropdown, DropdownMenu } from '@nextui-org/dropdown';
+import { Avatar } from '@nextui-org/avatar';
+import { Button } from "@nextui-org/button"; 
+import { Link } from "@nextui-org/link";
 import { auth } from '../libs/firebaseConfig'; 
 import { useRouter, usePathname } from 'next/navigation';
 import { signOut } from 'firebase/auth';

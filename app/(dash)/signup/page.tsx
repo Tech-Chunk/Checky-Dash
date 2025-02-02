@@ -1,12 +1,12 @@
 'use client';
 import React from "react";
-import {Input} from "@heroui/input";
+import {Input} from "@nextui-org/input";
 import { useState } from 'react';
 import { signUp, logIn } from '../../../libs/auth';
-import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
-import {Checkbox} from "@heroui/checkbox";
-import {Button} from "@heroui/button"
-import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@heroui/modal";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
+import {Checkbox} from "@nextui-org/checkbox";
+import {Button} from "@nextui-org/button"
+import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@nextui-org/modal";
 import { GoogleLogo } from "@/components/GoogleLogo";
 import { getAuth, signInWithPopup, GoogleAuthProvider, getRedirectResult } from "firebase/auth";
 export default function HomePage() {

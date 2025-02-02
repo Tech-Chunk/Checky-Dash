@@ -1,6 +1,6 @@
-import {Button,ButtonGroup} from "@heroui/button"
-import { Chip } from "@heroui/chip";
-import { Link } from "@heroui/link";
+import {Button,ButtonGroup} from "@nextui-org/button"
+import { Chip } from "@nextui-org/chip";
+import { Link } from "@nextui-org/link";
 import './styles.css'
 
 export default function HomePage() {

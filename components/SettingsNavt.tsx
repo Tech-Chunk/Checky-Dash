@@ -1,8 +1,8 @@
 "use client"
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
-import { Button, ButtonGroup } from "@heroui/button";
-import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@heroui/modal";
-import { Link } from "@heroui/link";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Button, ButtonGroup } from "@nextui-org/button";
+import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@nextui-org/modal";
+import { Link } from "@nextui-org/link";
 
 export default function SettingsNav() {
     return (
