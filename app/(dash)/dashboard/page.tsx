@@ -55,7 +55,7 @@ export default function Home() {
       <div className="flex flex-col justify-center gap-10">
       <div className="flex flex-wrap sm:flex-nowrap gap-4 justify-center align-middle">
         <Card className="w-full sm:w-1/2 p-4" style={{ height: "66vh" }}>
-          <CardHeader className="absolute z-10 top-1 flex-col items-start! gap-4">
+          <CardHeader className="absolute z-10 top-1 flex-col !items-start gap-4">
             <div className="flex flex-col">
               <h1 className="font-medium text-3xl">In Building</h1>
               <p className="text-medium">People currently checked in</p>
@@ -133,7 +133,7 @@ export default function Home() {
         </Card>
 
         <Card className="w-full sm:w-1/2 p-4" style={{ height: "66vh" }}>
-          <CardHeader className="absolute z-10 top-1 flex-col items-start!">
+          <CardHeader className="absolute z-10 top-1 flex-col !items-start">
             <div className="flex flex-col">
               <h1 className="font-medium text-3xl">Recent Activity</h1>
               <p className="text-medium">Recent Check-ins / Check-outs</p>
@@ -181,7 +181,7 @@ export default function Home() {
     <div className="flex flex-col justify-center gap-10">
       <div className="flex flex-wrap sm:flex-nowrap gap-4 justify-center align-middle">
         <Card className="w-full sm:w-1/2 p-4 overflow-y-auto" style={{ height: "66vh" }}>
-          <CardHeader className="absolute z-10 top-1 flex-col items-start! gap-4">
+          <CardHeader className="absolute z-10 top-1 flex-col !items-start gap-4">
             <div className="flex flex-col">
               <h1 className="font-medium text-3xl">In Building</h1>
               <p className="text-medium">People currently checked in</p>
@@ -213,7 +213,7 @@ export default function Home() {
         </Card>
 
         <Card className="w-full sm:w-1/2 p-4" style={{ height: "66vh" }}>
-          <CardHeader className="absolute z-10 top-1 flex-col items-start!">
+          <CardHeader className="absolute z-10 top-1 flex-col !items-start">
             <div className="flex flex-col">
               <h1 className="font-medium text-3xl">Recent Activity</h1>
               <p className="text-medium">Recent Check-ins / Check-outs</p>

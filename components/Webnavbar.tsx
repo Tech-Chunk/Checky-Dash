@@ -9,10 +9,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  
 } from "@nextui-org/navbar";
-
-
 import {
   DropdownItem,
   DropdownTrigger,

@@ -1,39 +1,25 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-
-@layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentColor);
-  }
-}
-
-@layer utilities {
-  :root {
+:root {
     font-family: Inter, sans-serif;
-    font-feature-settings:
-      'liga' 1,
-      'calt' 1;
+    font-feature-settings: 'liga' 1, 'calt' 1;
   }
   @supports (font-variation-settings: normal) {
-    :root {
-      font-family: InterVariable, sans-serif;
-    }
+    :root { font-family: InterVariable, sans-serif; }
   }
 
-  html,
-  body {
+
+html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-  }
+}
+  
 
-  .main {
+.main {
     justify-content: center;
-  }
 }
   
 
