@@ -5,12 +5,14 @@ interface User {
   name: string;
   checked_in: boolean;
   checkInTime?: string;
+  email: string;
 }
 
 interface CompanyData {
   companyId: string;
   companyName: string;
   users: User[];
+  email: string;
 }
 
 export const fetchCompanies = async (token: string): Promise<CompanyData> => {
@@ -29,13 +31,14 @@ export const fetchCompanies = async (token: string): Promise<CompanyData> => {
       return {
           companyId: '',
           companyName: '',
-          users: []
+          users: [],
+          email: ''
       };
     }
 
     // Validate data structure and checked_in property
     if (data && data.companyId && data.companyName && Array.isArray(data.users)) {
-      const validatedUsers = data.users.map(user => ({
+      const validatedUsers = data.users.map((user: any) => ({
         ...user,
         checked_in: Boolean(user.checked_in)
       }));

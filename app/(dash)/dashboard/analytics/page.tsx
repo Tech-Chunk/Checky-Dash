@@ -1,5 +1,5 @@
 "use client"
-import { Card, CardHeader} from "@nextui-org/card";
+import { Card, CardHeader} from "@heroui/card";
 import { BarChart, BarChartHorizontal, LineChart, PieChart } from "lucide-react";
 
 

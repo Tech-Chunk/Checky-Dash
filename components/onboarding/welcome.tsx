@@ -1,12 +1,12 @@
 "use client"
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {Button} from "@nextui-org/button"
-import {Input} from "@nextui-org/input"
-import {Select, SelectItem} from "@nextui-org/select"
+import {Button} from "@heroui/button"
+import {Input} from "@heroui/input"
+import {Select, SelectItem} from "@heroui/select"
 import countries from 'world-countries'
-import { Card, CardFooter, CardHeader } from '@nextui-org/card';
-import {Divider} from "@nextui-org/divider";
+import { Card, CardFooter, CardHeader } from "@heroui/card";
+import {Divider} from "@heroui/divider";
 
 interface OnboardingStepProps {
   onNext: () => void;

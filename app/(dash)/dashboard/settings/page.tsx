@@ -1,24 +1,25 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SettingsNav from "@/components/SettingsNavt";
-import { Card, CardHeader } from "@nextui-org/card";
-import { Divider } from "@nextui-org/divider";
+import { Card, CardHeader } from "@heroui/card";
+import { Divider } from "@heroui/divider";
+import { Skeleton } from "@heroui/skeleton";
 import { fetchCompanies } from "@/utils/fetchCompanys+Users";
-import { User } from "@nextui-org/user";
-import { Tooltip } from "@nextui-org/tooltip";
-import { Chip } from "@nextui-org/chip";
+import { User as UserComponent } from "@heroui/user";
+import { Tooltip } from "@heroui/tooltip";
+import { Chip } from "@heroui/chip";
 import { EditIcon } from "@/components/icons/EditIcon";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
 import { EyeIcon } from "@/components/icons/EyeIcon";
-import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@nextui-org/table";
+import { Table, TableHeader, TableBody, TableColumn, TableRow, TableCell } from "@heroui/table";
 import { columns, FormatedUsers, GetUsers} from "./data";
-import { Button } from "@nextui-org/button";
-import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@nextui-org/modal";
-import {Link} from "@nextui-org/link"
-import { Input } from "@nextui-org/input";
+import { Button } from "@heroui/button";
+import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter,  useDisclosure} from "@heroui/modal";
+import {Link} from "@heroui/link"
+import { Input } from "@heroui/input";
 import { auth } from '../../../../libs/firebaseConfig'; 
 import { useToast } from "@/hooks/use-toast"
-import { Pagination } from "@nextui-org/pagination";
+import { Pagination } from "@heroui/pagination";
 
 const statusColorMap: { [key: string]: string } = {
   active: "success",
@@ -28,14 +29,23 @@ const statusColorMap: { [key: string]: string } = {
   checkedOut: "secondary",
 };
 
+// Define a user data interface for our table rows
+interface UserData {
+  avatar?: string;
+  email: string;
+  team?: string;
+  checkedIn?: boolean;
+}
+
 export default function Settings() {
   const [token, setToken] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(true);
   const [formatedUsers, setFormatedUsers] = useState(FormatedUsers);
   const { toast } = useToast();
   const [visible, setVisible] = useState(false);
   const closeModal = () => setVisible(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
 
   const paginatedUsers = formatedUsers.slice(
     (currentPage - 1) * itemsPerPage,
@@ -49,6 +59,7 @@ export default function Settings() {
       
       const users = await GetUsers(token);
       setFormatedUsers(users);
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -81,19 +92,19 @@ export default function Settings() {
     } 
   }
 
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+  const renderCell = React.useCallback((user: UserData, columnKey: React.Key) => {
+    const cellValue = user[columnKey as keyof UserData];
 
     switch (columnKey) {
       case "name":
         return (
-          <User
+          <UserComponent
             avatarProps={{ radius: "lg", src: user.avatar }}
             description={user.email}
             name={cellValue}
           >
             {user.email}
-          </User>
+          </UserComponent>
         );
       case "role":
         return (
@@ -136,17 +147,7 @@ export default function Settings() {
 
   return (
     <div className="flex flex-row gap-10">
-      <div className="w-1/6">
-        <h1 className="text-3xl font-medium">Settings</h1>
-
-        <Divider className="mt-2 mb-2"></Divider>
-
-        <div className="flex flex-col gap-2">
-          <h2 className="text-xl">Users</h2>
-          <h2 className="text-xl">Customization</h2>
-          <h2 className="text-xl">Subscription</h2>
-        </div>
-      </div>
+      
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between flex-row">
         <h1 className="text-3xl mb-2">Users</h1>
@@ -201,21 +202,35 @@ export default function Settings() {
               </TableColumn>
             )}
           </TableHeader>
-          <TableBody items={paginatedUsers}>
-            {(item) => (
-              <TableRow key={item.id}>
-                {(columnKey) => (
-                  <TableCell
-                    className={
-                      columnKey === "actions" ? "flex justify-center" : ""
-                    }
-                  >
-                    {renderCell(item, columnKey)}
-                  </TableCell>
-                )}
-              </TableRow>
-            )}
-          </TableBody>
+          {loading ? (
+            <TableBody>
+              {Array.from({ length: itemsPerPage }).map((_, idx) => (
+                <TableRow key={idx}>
+                  {columns.map((column) => (
+                    <TableCell key={column.uid}>
+                      <Skeleton className="h-10 w-full rounded-lg" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          ) : (
+            <TableBody items={paginatedUsers}>
+              {(item) => (
+                <TableRow key={item.id}>
+                  {(columnKey) => (
+                    <TableCell
+                      className={
+                        columnKey === "actions" ? "flex justify-center" : ""
+                      }
+                    >
+                      {renderCell(item, columnKey)}
+                    </TableCell>
+                  )}
+                </TableRow>
+              )}
+            </TableBody>
+          )}
         </Table>
         <Pagination
           total={Math.ceil(formatedUsers.length / itemsPerPage)}

@@ -6,13 +6,13 @@ const columns = [
   {name: "ACTIONS", uid: "actions"},
 ];
 
-let FormatedUsers = [
-  {
-    id: 1,
-    name: "Tony Reichert",
-    status: "checked in",
-    email: "tony.reichert@example.com",
-  },
+let FormatedUsers: {
+  id: string;
+  name: string;
+  status: string;
+  email: string;
+}[] = [
+
 ];
 
 async function GetUsers(token: any) {

@@ -1,10 +1,10 @@
 "use client";
 
-import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Skeleton } from "@nextui-org/skeleton";
-import { Button, ButtonGroup } from "@nextui-org/button";
-import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@nextui-org/modal";
-import {Avatar, AvatarGroup, AvatarIcon} from "@nextui-org/avatar";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Skeleton } from "@heroui/skeleton";
+import { Button, ButtonGroup } from "@heroui/button";
+import {  Modal,   ModalContent,   ModalHeader,   ModalBody,   ModalFooter, useDisclosure} from "@heroui/modal";
+import {Avatar, AvatarGroup, AvatarIcon} from "@heroui/avatar";
 import { useEffect, useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/libs/firebaseConfig';
@@ -16,12 +16,15 @@ interface User {
   name: string;
   checked_in: boolean; 
   checkInTime?: string; 
+  email: string;
 }
+
 interface Company {
   companyId: string;
   companyName: string;
   users: User[];
 }
+
 
 
 export default function Home() {
@@ -37,7 +40,18 @@ export default function Home() {
           const token = await user.getIdToken();
           const companyData = await fetchCompanies(token);
           console.log('Fetched company data:', companyData);
-          setCompanies(companyData);
+          const transformedCompany = {
+            companyId: companyData.companyId,
+            companyName: companyData.companyName,
+            users: companyData.users.map(user => ({
+              id: user.userID,
+              name: user.name,
+              checked_in: user.checked_in,
+              checkInTime: user.checkInTime,
+              email: user.email
+            }))
+          };
+          setCompanies(transformedCompany);
         } catch (error) {
           console.error('Error fetching companies:', error);
         }
@@ -187,7 +201,7 @@ export default function Home() {
               <p className="text-medium">People currently checked in</p>
             </div>
 
-            {companies?.users?.length > 0 ? (
+            {companies && companies.users.length > 0 ? (
               companies.users
                 .filter(user => user.checked_in)
                 .map(user => (
