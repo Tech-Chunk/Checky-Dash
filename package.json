@@ -40,7 +40,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "country-list": "^2.3.0",
-    "firebase": "^10.14.1",
+    "firebase": "^11.3.1",
     "firebase-admin": "^12.7.0",
     "framer-motion": "~11.11.17",
     "intl-messageformat": "^10.5.0",
